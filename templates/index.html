@@ -26,6 +26,20 @@
   </header>
 
   <main>
+    <section class="card info-card">
+      <h2>Mire használható ez a demó?</h2>
+      <p>
+        Ez a felület egy PaaS vezérlőpult prototípusa. Az itt létrehozott alkalmazások
+        csak a memória állapotát frissítik, valódi telepítés vagy build nélkül.
+      </p>
+      <ul>
+        <li>App hozzáadásakor egy új kártya jelenik meg.</li>
+        <li>A skálázás csak a darabszámot állítja.</li>
+        <li>Indítás/Leállítás a státusz címkét váltja.</li>
+        <li>Törlés esetén a kártya eltűnik a listából.</li>
+      </ul>
+    </section>
+
     <section class="card">
       <h2>Új alkalmazás telepítése</h2>
       <form class="form" action="{{ url_for('create_app') }}" method="post">

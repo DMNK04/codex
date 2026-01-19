@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini PaaS – Kezelőfelület</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Mini PaaS</p>
+      <h1>Könnyű alkalmazáskezelés egy helyen</h1>
+      <p class="hero__subtitle">Hozz létre, skálázz és állíts le szolgáltatásokat gyorsan.</p>
+    </div>
+    <div class="hero__stats">
+      <div>
+        <span class="stat__label">Aktív appok</span>
+        <span class="stat__value">{{ services | length }}</span>
+      </div>
+      <div>
+        <span class="stat__label">Futó instanciák</span>
+        <span class="stat__value">{{ services | sum(attribute='instances') }}</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Új alkalmazás telepítése</h2>
+      <form class="form" action="{{ url_for('create_app') }}" method="post">
+        <label>
+          Név
+          <input type="text" name="name" placeholder="pl. web-frontend" required>
+        </label>
+        <label>
+          Runtime
+          <input type="text" name="runtime" placeholder="Python, Node.js, Go">
+        </label>
+        <label>
+          Repo URL
+          <input type="text" name="repo_url" placeholder="https://github.com/...">
+        </label>
+        <button type="submit">App létrehozása</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Telepített alkalmazások</h2>
+      {% if services %}
+        <div class="grid">
+          {% for service in services %}
+            <article class="app-card">
+              <div class="app-card__header">
+                <h3>{{ service.name }}</h3>
+                <span class="badge {{ 'badge--running' if service.status == 'Running' else 'badge--stopped' }}">
+                  {{ service.status }}
+                </span>
+              </div>
+              <p class="muted">Runtime: <strong>{{ service.runtime }}</strong></p>
+              <p class="muted">Repo: <span>{{ service.repo_url }}</span></p>
+              <p class="muted">Indult: {{ service.created_at.strftime('%Y-%m-%d %H:%M') }} UTC</p>
+
+              <form class="inline-form" action="{{ url_for('scale_app', app_id=service.id) }}" method="post">
+                <label>
+                  Instanciák
+                  <input type="number" min="0" name="instances" value="{{ service.instances }}">
+                </label>
+                <button type="submit">Skálázás</button>
+              </form>
+
+              <div class="app-card__actions">
+                <form action="{{ url_for('toggle_app', app_id=service.id) }}" method="post">
+                  <button type="submit" class="secondary">
+                    {{ 'Leállítás' if service.status == 'Running' else 'Indítás' }}
+                  </button>
+                </form>
+                <form action="{{ url_for('delete_app', app_id=service.id) }}" method="post">
+                  <button type="submit" class="danger">Törlés</button>
+                </form>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="empty">Még nincs telepített alkalmazás. Adj hozzá egyet a fenti űrlappal!</p>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer>
+    <p>Mini PaaS demó – gyors prototípus a szolgáltatások menedzseléséhez.</p>
+  </footer>
+</body>
+</html>

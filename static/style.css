@@ -1,0 +1,184 @@
+:root {
+  color-scheme: light;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background: #f5f6fb;
+  color: #1f2430;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #f5f6fb;
+}
+
+header.hero {
+  padding: 48px 8vw 36px;
+  background: linear-gradient(120deg, #1d4ed8, #0f172a);
+  color: #f8fafc;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.hero__content h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  margin-bottom: 8px;
+}
+
+.hero__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  margin: 0 0 12px;
+  opacity: 0.8;
+}
+
+.hero__subtitle {
+  margin: 0;
+  color: #e2e8f0;
+}
+
+.hero__stats {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stat__label {
+  display: block;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+.stat__value {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+main {
+  padding: 32px 8vw 48px;
+  display: grid;
+  gap: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  font-size: 0.95rem;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #1d4ed8;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #0f172a;
+}
+
+button.danger {
+  background: #dc2626;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.app-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.app-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge--running {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge--stopped {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.inline-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.inline-form input {
+  max-width: 90px;
+}
+
+.app-card__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.muted {
+  color: #64748b;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.empty {
+  color: #94a3b8;
+}
+
+footer {
+  padding: 24px 8vw 40px;
+  text-align: center;
+  color: #64748b;
+}
